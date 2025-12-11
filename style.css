@@ -131,15 +131,14 @@ nav a.active {
 
 /* 4. The Interest Box (Glass Card) */
 .interests-lists {
-    /* flex: 0 (don't grow), 1 (can shrink), auto (base size) */
-    flex: 0 1 auto;
-
-    /* Set a specific width so it matches the passport size better */
+    flex: 1 1 auto;
+    /* Allow it to grow/shrink properly */
     width: 100%;
-    max-width: 100px;
-    /* LIMITS the width so it doesn't stretch across the screen */
+    /* Fill the space */
+    /* CHANGED: Reduced from 500px to 400px for a more compact desktop look */
+    max-width: 400px;
     min-width: 300px;
-    /* Ensures it doesn't get too squished on phones */
+    /* Keep this to prevent squishing */
 }
 
 /* --- 4. DASHBOARD GRID --- */
@@ -238,63 +237,64 @@ ul.details-list li::before {
     color: #1572B6;
 }
 
-/* --- 5. CONTACT SECTION (Aligned & Centered) --- */
+/* Contact Section Wrapper */
 #contact {
     padding: 4rem 0 6rem;
+    width: 100%;
     display: flex;
     justify-content: center;
-    /* This centers the whole group on the screen */
+    /* centers everything */
 }
 
-/* New Wrapper: Holds Title + Box */
-.contact-wrapper {
+/* Centers the whole block */
+.contact-section {
+    width: 100%;
+    max-width: 480px;
     display: flex;
     flex-direction: column;
-    /* Stack them vertically */
-    align-items: flex-start;
-    /* Align both Title and Box to the LEFT edge */
-    gap: 1.5rem;
-    /* Space between Title and Box */
-    width: fit-content;
-    /* Shrink the wrapper to fit the content size */
+    align-items: center;
+    gap: 20px;
 }
 
-/* The Title inside the wrapper */
-.contact-wrapper .section-title {
+/* Title centered */
+.section-title {
+    font-size: 2rem;
+    color: #fff;
+    font-weight: 600;
     text-align: center;
-    /* Force text to left */
-    margin-bottom: 0;
-    /* Remove extra bottom margin */
-    padding-left: 30%;
-    /* Slight nudge to align with the box's rounded corner */
+    margin: 0;
 }
 
-/* The Box */
-.contact-container {
+/* The card box (kept EXACTLY like your original style) */
+.contact-box {
     display: flex;
     flex-direction: column;
+
+    /* left alignment INSIDE the box */
     align-items: flex-start;
-    justify-content: center;
+
     background: rgba(30, 30, 60, 0.6);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 3rem 4rem;
+
+    padding: 2.5rem 2rem;
+
     border-radius: 20px;
     gap: 1.5rem;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
 
-    /* Remove the old centering margins because the wrapper handles it now */
-    margin: 0;
-    min-width: 350px;
+    width: 100%;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
 }
 
+/* Contact link styles */
 .contact-link {
     display: flex;
     align-items: center;
     color: #fff;
     text-decoration: none;
     font-size: 1.1rem;
-    width: 100%;
-    transition: transform 0.2s;
+
+    white-space: nowrap;
+    transition: transform 0.2s ease;
 }
 
 .contact-link:hover {
@@ -305,22 +305,22 @@ ul.details-list li::before {
     color: var(--accent-teal);
     font-size: 1.4rem;
     width: 40px;
-    text-align: center;
     margin-right: 1rem;
 }
 
-/* Responsive: On mobile, center everything again */
+/* Mobile */
 @media (max-width: 768px) {
-    .contact-wrapper {
-        width: 100%;
-        align-items: center;
-        /* Center align on phone */
+    .contact-section {
+        width: 90%;
+        max-width: 450px;
     }
 
-    .contact-container {
-        width: 100%;
-        padding: 2rem;
-        min-width: auto;
+    .contact-box {
+        padding: 2rem 1.5rem;
+    }
+
+    .contact-link {
+        font-size: 1rem;
     }
 }
 
@@ -496,10 +496,20 @@ ul.details-list li::before {
         font-size: 2.5rem;
     }
 
-    /* Stack Passport & Interests */
     .about-overview {
         flex-direction: column;
+        /* Stacks passport on top of box */
+        align-items: center;
         gap: 2rem;
+    }
+
+    .interests-lists {
+        width: 100%;
+        /* Full width on phone */
+        max-width: 400px;
+        /* Optional: keep it neat */
+        min-width: 300px;
+        /* Enforce size so text doesn't break */
     }
 
     .passport-wrapper {
